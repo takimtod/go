@@ -41,10 +41,3 @@ If you want to contribute to the development of this bot, here are the steps you
 <h2>Lisensi</h2>
 
 [GPL-3.0 license](/LICENSE.txt)
-
-<h2>Thanks To</h2>
-
-[![fckvania](https://github.com/fckvania.png?size=100)](https://github.com/fckvania) | [![Leuthra](https://github.com/Leuthra.png?size=100)](https://github.com/Leuthra) | [![Amirul](https://github.com/amiruldev20.png?size=100)] [![fckvania](https://github.com/takimtod.png?size=100)](https://github.com/takimtod) (https://github.com/takimtod)
-----|----|----|----
-[fckvania](https://github.com/fckvania) | [Leuthra](https://github.com/Leuthra) | [amiruldev20](https://github.com/amiruldev20) | [takimtod](https://github.com/takimtod)
-Created Base | Recreate Base | Contribute for func | Recreate Base
