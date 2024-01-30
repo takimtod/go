@@ -7,10 +7,10 @@ import (
 	"inc/lib/helpers"
 	"os"
 	"os/signal"
-  "path"
+        "path"
 	"syscall"
- "net/http"
-  "text/template"
+        "net/http"
+        "text/template"
 
   
 	_ "inc/plugins"
@@ -21,7 +21,7 @@ import (
 	_ "inc/plugins/info"
 	_ "inc/plugins/owner"
 	_ "inc/plugins/tools"
-    _ "inc/plugins/random"
+        _ "inc/plugins/random"
 
 
 	_ "github.com/mattn/go-sqlite3"
