@@ -38,7 +38,7 @@ type ApiResponse struct {
 }
 
 
-	apiUrl := "https://api.arifzyn.tech/download/instagram?url="+m.Querry+"&apikey=Danukiding"
+	apiUrl := "https://api.arifzyn.tech/download/instagram?url="+m.Querry+"&apikey="+os.Getenv("KEY")
 	resp, err := http.Get(apiUrl)
 	if err != nil {
 		fmt.Println("Error:", err)
