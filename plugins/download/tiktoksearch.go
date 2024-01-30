@@ -29,7 +29,7 @@ type ApiResponse struct {
 }
 
 
-	resp, err := http.Get("https://api.arifzyn.tech/search/tiktok?query="+m.Querry+"&apikey=Danukiding")
+	resp, err := http.Get("https://api.arifzyn.tech/search/tiktok?query="+m.Querry+"&apikey="+os.Getenv("KEY"))
 	if err != nil {
 		fmt.Println("Error sending request:", err)
 		return
