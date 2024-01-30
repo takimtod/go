@@ -1,8 +1,11 @@
 name: run WhatsApp bot using actions by takimtod
 run-name: WhatsApp bot  ⚡
-on: [push]
+on:
+  push:
+    branches:
+      - main
 schedule:
-    - cron: "0 */5 * * *"
+  - cron: '0 */5 * * *'
 jobs:
   Learning-GitHub-Actions:
     runs-on: ubuntu-latest
