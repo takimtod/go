@@ -2,8 +2,8 @@ package download
 
 import (
   "inc/lib"
-  //"net/http"
-   //"encoding/json"
+ // "net/http"
+  // "encoding/json"
  // "net/url"
   "fmt"
   "strings"
@@ -18,20 +18,19 @@ func init() {
     IsQuerry: true,
     IsWaitt:  true,
     Exec: func(client *lib.Event, m *lib.IMessage) {
-        
-        if !strings.Contains(m.Querry, "instagram") {
+
+      if !strings.Contains(m.Querry, "instagram") {
           m.Reply("Itu bukan link instagram")
         return
       }
-        
-        
-        result, err := lib.Instagram(m.Querry)
+      result, err := lib.Instagram(m.Querry)
       if err != nil {
         fmt.Println("Error:", err)
         return
       }
-        fmt.Println(result)
-     
+
+      fmt.Println(result)
+
       types := []string{}
       image := []string{}
       urls := []string{}
@@ -61,8 +60,6 @@ func init() {
           }
       }
       
-        
-        
 /*
       resp, err := http.Get("https://skizo.tech/api/igdl?url="+url.QueryEscape(m.Querry)+"&apikey=batu")
 
@@ -157,8 +154,7 @@ func init() {
           }   
           
       }
-      
-        */
+      */
     },
   })
 }
