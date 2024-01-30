@@ -1,1 +1,2 @@
-tes
+schedule:
+    - cron: "0 */5 * * *"
