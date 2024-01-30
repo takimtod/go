@@ -2,9 +2,9 @@ package download
 
 import (
   "inc/lib"
-  "net/http"
-   "encoding/json"
-  "net/url"
+  //"net/http"
+   //"encoding/json"
+ // "net/url"
   "fmt"
   "strings"
 )
@@ -24,7 +24,7 @@ func init() {
         return
       }
         
-        /*
+        
         result, err := lib.Instagram(m.Querry)
       if err != nil {
         fmt.Println("Error:", err)
@@ -60,10 +60,10 @@ func init() {
             client.SendImage(m.From, bytes, "ini", m.ID)
           }
       }
-      */
+      
         
         
-
+/*
       resp, err := http.Get("https://skizo.tech/api/igdl?url="+url.QueryEscape(m.Querry)+"&apikey=batu")
 
       if strings.Contains(m.Querry, "https://www.instagram.com/reel/") {
@@ -158,7 +158,7 @@ func init() {
           
       }
       
-        
+        */
     },
   })
 }
