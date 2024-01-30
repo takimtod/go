@@ -1,11 +1,8 @@
-name: run WhatsApp bot using actions by takimtod
+name: run WhatsApp bot using actions by KazeDevID
 run-name: WhatsApp bot  ⚡
+on: [push]
 schedule:
-  - cron: '0 */5 * * *'
-on:
-  push:
-    branches:
-      - main
+    - cron: "0 */5 * * *"
 jobs:
   Learning-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -19,5 +16,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@master
 
-      - name: execute golang by takimtod
+      - name: Install dependencies
+        run: go build -o main .
+
+      - name: execute js script by KazeDevID
         run: go run main.go
