@@ -6,6 +6,7 @@ import (
   "net/http"
    "encoding/json"
   "io/ioutil"
+ // "net/url"
 )
 
 func init() {
@@ -19,8 +20,45 @@ func init() {
     IsWaitt:  true,
     Exec: func(client *lib.Event, m *lib.IMessage) {
 
+
+
+type ApiResponse struct {
+	Status  int    `json:"status"`
+	Creator string `json:"creator"`
+	Result  []string `json:"result"`
+}
+
+
+	resp, err := http.Get("https://api.arifzyn.tech/search/tiktok?query="+m.Querry+"&apikey=Danukiding")
+	if err != nil {
+		fmt.Println("Error sending request:", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Error reading response body:", err)
+		return
+	}
+
+	var apiResponse ApiResponse
+	err = json.Unmarshal(body, &apiResponse)
+	if err != nil {
+	  fmt.Println(err)
+    }
+
+        bytes, err := client.GetBytes(apiResponse.Result[0])
+      if err != nil {
+        m.Reply(err.Error())
+        return
+      }
+      client.SendVideo(m.From, bytes, "", m.ID)
+  
+      
+      /******************************************
       // Mengambil informasi tentang video
-      url := "https://skizo.tech/api/ttsearch?search=" + m.Querry + "&apikey=kertas"
+      url := "https://skizo.tech/api/ttsearch?search=" + url.QueryEscape(m.Querry) + "&apikey=batu"
       resp, err := http.Get(url)
       if err != nil {
         fmt.Println("Error:", err)
@@ -70,6 +108,7 @@ func init() {
         return
       }
       client.SendVideo(m.From, bytes, caption, m.ID)
+      */
     },
   })
 }
