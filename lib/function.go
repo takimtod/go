@@ -42,6 +42,8 @@ func Instagram(URL string) ([]map[string]string, error) {
   locale := doc.Find("input[name=locale]").AttrOr("value", "")
   token := doc.Find("input[name=_token]").AttrOr("value", "")
 
+	fmt.Println(locale, referer, token)
+	
   params := url.Values{}
   params.Set("link", URL)
   params.Set("referer", referer)
