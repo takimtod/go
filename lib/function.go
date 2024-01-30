@@ -19,65 +19,61 @@ import (
  "github.com/PuerkitoBio/goquery"
 )
 
-func Instagram(url string) ([]map[string]string, error) {
+func Instagram(URL string) ([]map[string]string, error) {
   client := &http.Client{}
-
-  // Send GET request to https://indown.io/
-  res, err := client.Get("https://indown.io/")
+  resp, err := client.Get("https://indown.io/")
   if err != nil {
     return nil, err
   }
-  defer res.Body.Close()
+  defer resp.Body.Close()
 
-  // Read the response body
-  body, err := ioutil.ReadAll(res.Body)
-  if err != nil {
-    return nil, err
-  }
-
-  // Load the response body into goquery document
-  doc, err := goquery.NewDocumentFromReader(strings.NewReader(string(body)))
+  bodyBytes, err := ioutil.ReadAll(resp.Body)
   if err != nil {
     return nil, err
   }
 
-  // Extract the values from the HTML form
-  referer := doc.Find("input[name=referer]").First().AttrOr("value", "")
-  locale := doc.Find("input[name=locale]").First().AttrOr("value", "")
-  _token := doc.Find("input[name=_token]").First().AttrOr("value", "")
-
-  // Prepare the POST data
-  data := strings.NewReader(fmt.Sprintf("link=%s&referer=%s&locale=%s&_token=%s", url, referer, locale, _token))
-
-  // Send POST request to https://indown.io/download
-  req, err := http.NewRequest("POST", "https://indown.io/download", data)
-  if err != nil {
-    return nil, err
-  }
-  req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
-  req.Header.Set("Cookie", strings.Join(res.Header["Set-Cookie"], "; "))
-
-  res, err = client.Do(req)
-  if err != nil {
-    return nil, err
-  }
-  defer res.Body.Close()
-
-  // Read the response body
-  body, err = ioutil.ReadAll(res.Body)
+  body := string(bodyBytes)
+  doc, err := goquery.NewDocumentFromReader(strings.NewReader(body))
   if err != nil {
     return nil, err
   }
 
-  // Load the response body into goquery document
-  doc, err = goquery.NewDocumentFromReader(strings.NewReader(string(body)))
+  referer := doc.Find("input[name=referer]").AttrOr("value", "")
+  locale := doc.Find("input[name=locale]").AttrOr("value", "")
+  token := doc.Find("input[name=_token]").AttrOr("value", "")
+
+  params := url.Values{}
+  params.Set("link", URL)
+  params.Set("referer", referer)
+  params.Set("locale", locale)
+  params.Set("_token", token)
+
+  req, err := http.NewRequest("POST", "https://indown.io/download", strings.NewReader(params.Encode()))
+  if err != nil {
+    return nil, err
+  }
+  req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
+  req.Header.Add("Content-Length", fmt.Sprint(len(params.Encode())))
+  req.Header.Add("Cookie", strings.Join(resp.Header["Set-Cookie"], "; "))
+
+  resp, err = client.Do(req)
+  if err != nil {
+    return nil, err
+  }
+  defer resp.Body.Close()
+
+  bodyBytes, err = ioutil.ReadAll(resp.Body)
   if err != nil {
     return nil, err
   }
 
-  result := make([]map[string]string, 0)
+  body = string(bodyBytes)
+  doc, err = goquery.NewDocumentFromReader(strings.NewReader(body))
+  if err != nil {
+    return nil, err
+  }
 
-  // Extract video data
+  result := []map[string]string{}
   doc.Find("#result video").Each(func(i int, s *goquery.Selection) {
     thumbnail, _ := s.Attr("poster")
     videoURL, _ := s.Find("source").Attr("src")
@@ -89,7 +85,6 @@ func Instagram(url string) ([]map[string]string, error) {
     })
   })
 
-  // Extract image data
   doc.Find("#result img").Each(func(i int, s *goquery.Selection) {
     imageURL, _ := s.Attr("src")
 
@@ -101,6 +96,7 @@ func Instagram(url string) ([]map[string]string, error) {
 
   return result, nil
 }
+
 
 func Pixiv(query string) (string, error) {
     urlParsed, err := url.Parse("https://www.pixiv.net/ajax/search/artworks/"+ query)
