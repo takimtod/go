@@ -2,11 +2,12 @@ package download
 
 import (
   "inc/lib"
- // "net/http"
-  // "encoding/json"
+  "net/http"
+  "encoding/json"
  // "net/url"
   "fmt"
   "strings"
+  	"io/ioutil"
 )
 
 func init() {
@@ -23,6 +24,59 @@ func init() {
           m.Reply("Itu bukan link instagram")
         return
       }
+    
+
+type Result struct {
+	Status int    `json:"status"`
+	Media  []string `json:"media"`
+}
+
+type ApiResponse struct {
+	Status   int      `json:"status"`
+	Creator  string   `json:"creator"`
+	Response Result `json:"result"`
+}
+
+
+	apiUrl := "https://api.arifzyn.tech/download/instagram?url="+m.Querry+"&apikey=Danukiding"
+	resp, err := http.Get(apiUrl)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+	defer resp.Body.Close()
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	var apiResponse ApiResponse
+	err = json.Unmarshal(body, &apiResponse)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	for _, mediaUrl := range apiResponse.Response.Media {
+		fmt.Println("Media URL:", mediaUrl)
+    
+    bytes, err := client.GetBytes(mediaUrl)
+          if err != nil {
+             fmt.Println("Error:", err)
+            return
+          }
+          client.SendVideo(m.From, bytes, "", m.ID)
+    client.SendImage(m.From, bytes, "", m.ID)
+    
+             
+	}
+
+
+	
+
+      /*
       result, err := lib.Instagram(m.Querry)
       if err != nil {
         fmt.Println("Error:", err)
@@ -59,8 +113,8 @@ func init() {
             client.SendImage(m.From, bytes, "ini", m.ID)
           }
       }
-      
-/*
+
+            
       resp, err := http.Get("https://skizo.tech/api/igdl?url="+url.QueryEscape(m.Querry)+"&apikey=batu")
 
       if strings.Contains(m.Querry, "https://www.instagram.com/reel/") {
