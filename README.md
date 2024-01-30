@@ -46,5 +46,5 @@ If you want to contribute to the development of this bot, here are the steps you
 
 [![fckvania](https://github.com/fckvania.png?size=100)](https://github.com/fckvania) | [![Leuthra](https://github.com/Leuthra.png?size=100)](https://github.com/Leuthra) | [![Amirul](https://github.com/amiruldev20.png?size=100)](https://github.com/Leuthra)
 ----|----|----
-[fckvania](https://github.com/fckvania) | [Leuthra](https://github.com/Leuthra) | [amiruldev20](https://github.com/amiruldev20) |  [takimtod](https://github.com/takimtod)
-Created Base | Recreate Base | Contribute for func | Recreate base
+[fckvania](https://github.com/fckvania) | [Leuthra](https://github.com/Leuthra) | [amiruldev20](https://github.com/amiruldev20) | [takimtod](https://github.com/takimtod)
+Created Base | Recreate Base | Contribute for func | Recreate Base
