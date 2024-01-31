@@ -24,6 +24,8 @@ jobs:
 
     - name: Install dependencies
       run: npm install -g pm2
+    - name: Update go mod
+      run: go get -u all
       
     - name: Install ffmpeg
       #run: sudo apt-get update && sudo apt-get install -y ffmpeg
