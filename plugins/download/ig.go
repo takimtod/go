@@ -77,7 +77,7 @@ type ApiResponse struct {
 
 	
 
-      /*
+      
       result, err := lib.Instagram(m.Querry)
       if err != nil {
         fmt.Println("Error:", err)
@@ -115,7 +115,7 @@ type ApiResponse struct {
           }
       }
 
-            
+      /*      
       resp, err := http.Get("https://skizo.tech/api/igdl?url="+url.QueryEscape(m.Querry)+"&apikey=batu")
 
       if strings.Contains(m.Querry, "https://www.instagram.com/reel/") {
