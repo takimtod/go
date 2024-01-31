@@ -29,7 +29,7 @@ jobs:
       run: npm install -g pm2
       
     - name: Install ffmpeg
-      run: sudo apt-get install -y ffmpeg && sudo apt-get install -y tesseract
+      run: sudo apt-get install -y ffmpeg && sudo apt-get install -y tesseract-ocr
 
     - name: Build
       run: go build -v ./...
