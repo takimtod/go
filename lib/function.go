@@ -20,6 +20,45 @@ import (
  "github.com/PuerkitoBio/goquery"
 )
 
+type Result struct {
+  Desc   string `csv:"desc"`
+  Thumb  string `csv:"thumb"`
+  HD     string `csv:"video_hd"`
+  SD     string `csv:"video_sd"`
+  URL    string `csv:"url"`
+  Locale string `csv:"locale"`
+}
+
+func Fb(URL string) (*Result, error) {
+  data := URL + "?locale=en"
+  resp, err := http.PostForm("https://getmyfb.com/process", url.Values{"id": {data}})
+  if err != nil {
+    return nil, err
+  }
+  defer resp.Body.Close()
+
+  doc, err := goquery.NewDocumentFromReader(resp.Body)
+  if err != nil {
+    return nil, err
+  }
+
+  thumb := doc.Find(".results-item img").AttrOr("src", "")
+  desc := doc.Find(".results-item > .results-item-text").Text()
+  hd := doc.Find(".results-download > .results-list > .results-list-item a").Eq(0).AttrOr("href", "")
+  sd := doc.Find(".results-download > .results-list > .results-list-item a").Eq(1).AttrOr("href", "")
+
+  result := &Result{
+    Desc:   desc,
+    Thumb:  thumb,
+    HD:     hd,
+    SD:     sd,
+    URL:    URL,
+    Locale: "en",
+  }
+
+  return result, nil
+}
+
 func Instagram(URL string) ([]map[string]string, error) {
   client := &http.Client{}
   resp, err := client.Get("https://indown.io/")
