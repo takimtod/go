@@ -13,9 +13,7 @@ import (
         "net/http"
         "text/template"
 	
-	"strconv"
-	"github.com/actions-go/toolkit/core"
-
+	
   
 	_ "inc/plugins"
 	_ "inc/plugins/convert"
@@ -137,19 +135,9 @@ func main() {
     
 	}
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
-	portInt, err := strconv.Atoi(port)
-	if err != nil {
-		core.SetFailed(fmt.Sprintf("Invalid port number: %s", port))
-		return
-	}
-	fmt.Printf("Web port: %d\n", portInt)
 
 	
-//go HttpStatic(client)
+go HttpStatic(client)
 
 	// Listen to Ctrl+C (you can also do something else that prevents the program from exiting)
 	c := make(chan os.Signal)
