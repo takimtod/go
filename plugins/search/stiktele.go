@@ -22,7 +22,7 @@ func init() {
       }
 
     for _, sticker := range resp["sticker"].([]string) {
-      time.Sleep(2 * time.Second)
+      time.Sleep(5 * time.Second)
 
     bytes, err := client.GetBytes(sticker)
     if err != nil {
