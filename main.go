@@ -24,6 +24,7 @@ import (
 	_ "inc/plugins/owner"
 	_ "inc/plugins/tools"
         _ "inc/plugins/random"
+	 _ "inc/plugins/search"
 
 
 	_ "github.com/mattn/go-sqlite3"
