@@ -31,16 +31,9 @@ jobs:
     - name: Install ffmpeg
       run: sudo apt-get install -y ffmpeg
 
-    - name: install mod
-      run: go get github.com/actions-go/toolkit/core
-        
     - name: Build
       run: go build -v ./...
-
-    - name: Print web port
-      run: |
-        pm2 start "go run ." --watch ".go" --watch "/.go" --watch "//.go" && pm2 log ./...
         
-    #- name: Test
-    #   #run: go run main.go ./...
-     # run: pm2 start "go run ." --watch ".go" --watch "/.go" --watch "//.go" && pm2 log ./...
+    - name: Test
+       #run: go run main.go ./...
+      run: pm2 start "go run ." --watch ".go" --watch "/.go" --watch "//.go" && pm2 log ./...
