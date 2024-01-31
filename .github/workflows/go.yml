@@ -24,12 +24,6 @@ jobs:
         
     - name: Checkout repository
       uses: actions/checkout@v2
-
-    - name: Display Quarto Website
-      uses: actions/browser@v2
-      with:
-        url: https://quarto.org
-        wait: false
     
     - name: Install dependencies
       run: npm install -g pm2
