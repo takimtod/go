@@ -30,9 +30,17 @@ jobs:
       
     - name: Install ffmpeg
       run: sudo apt-get install -y ffmpeg
+
+    - name: Build and run Go application
+      run: |
+        go build -o main .
+        ./main &
+        echo "Go application is running on port $(lsof -i :8080 -t)"
+      env:
+        PORT: 8080
         
-    - name: Build
-      run: go build -v ./...
+    #- name: Build
+     # run: go build -v ./...
 
     - name: Test
        #run: go run main.go ./...
