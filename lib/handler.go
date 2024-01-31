@@ -50,9 +50,8 @@ func RegisterHandler(client *whatsmeow.Client, jbot ...bool) func(evt interface{
 		case *events.Message:
       m := NewSmsg(v, sock, jbot...)
       //if !helpers.Public && !m.IsOwner {
-	if !m.IsOwner {
-        return
-      }
+        //return
+     // }
        go Get(sock, m)
 		
 		}
