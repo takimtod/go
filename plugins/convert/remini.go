@@ -15,7 +15,7 @@ func init() {
      IsWaitt:  true,
     Exec: func(client *lib.Event, m *lib.IMessage) {
       
-        m.Reply("Processing 2-3 minutes...")
+        m.Reply("fitur ini tidak digunakan lgi, erorrrrrrrrrr")
         
       data, _ := client.WA.Download(m.Media)
 
